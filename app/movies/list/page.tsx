@@ -1,6 +1,5 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { db } from '@/lib/db';
-import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
 import React from 'react'
 
