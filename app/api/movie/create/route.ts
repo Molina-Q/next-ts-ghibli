@@ -5,8 +5,7 @@ import React from 'react'
 
 
 export async function POST(
-    req: Request,
-    { params }: { params: { movieId: string } }
+    req: Request
 ) {
     try {
         const { title, duration, dateRelease, synopsis, note, poster, directorId } = await req.json();
@@ -15,7 +14,7 @@ export async function POST(
                 id: Number(directorId)
             }
         });
-        
+
         const movie = await db.movie.create({
             data: {
                 title,
