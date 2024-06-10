@@ -30,13 +30,13 @@ const formSchema = z.object({
   title: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
-  duration: z.string().transform((v) => Number(v)||0),
+  duration: z.string().transform((v) => Number(v) || 0),
   synopsis: z.string().min(10, {
     message: "Synopsis must be at least 10 characters.",
   }),
-  note: z.string().transform((v) => Number(v)||0),
+  note: z.string().transform((v) => Number(v) || 0),
   dateRelease: z.date(),
-  directorId: z.string().transform((v) => Number(v)||0),
+  directorId: z.string().transform((v) => Number(v) || 0),
 })
 
 export default function Movie() {
@@ -73,8 +73,9 @@ export default function Movie() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <Form {...form} >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 space-x-10">
+
         <FormField
           control={form.control}
           name="title"
@@ -82,7 +83,7 @@ export default function Movie() {
             <FormItem>
               <FormLabel>Name of the movie</FormLabel>
               <FormControl>
-                <Input placeholder="Howl and the moving castle" {...field} />
+                <Input type="text" placeholder="Howl and the moving castle" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
