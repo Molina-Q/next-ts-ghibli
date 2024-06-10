@@ -10,6 +10,11 @@ export async function POST(
 ) {
     try {
         const { title, duration, dateRelease, synopsis, note, poster, directorId } = await req.json();
+        const director = await db.director.findUnique({
+            where: {
+                id: Number(directorId)
+            }
+        });
         
         const movie = await db.movie.create({
             data: {
@@ -19,7 +24,7 @@ export async function POST(
                 synopsis,
                 note,
                 // poster,
-                directorId
+                directorId: director?.id
             }
         });
 
