@@ -30,19 +30,13 @@ const formSchema = z.object({
   title: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
-  duration: z.number().min(0, {
-    message: "Duration must be a positive number.",
-  }),
+  duration: z.string().transform((v) => Number(v)||0),
   synopsis: z.string().min(10, {
     message: "Synopsis must be at least 10 characters.",
   }),
-  note: z.number().int().min(0).max(10, {
-    message: "Note must be an integer between 0 and 10.",
-  }),
-  releaseDate: z.date(),
-  directorId: z.number().int().positive({
-    message: "Director ID must be a positive integer.",
-  }),
+  note: z.string().transform((v) => Number(v)||0),
+  dateRelease: z.date(),
+  directorId: z.string().transform((v) => Number(v)||0),
 })
 
 export default function Movie() {
@@ -58,7 +52,7 @@ export default function Movie() {
       duration: 0,
       synopsis: "",
       note: 0,
-      releaseDate: new Date(),
+      dateRelease: new Date(),
       directorId: 0,
     },
   })
@@ -66,7 +60,7 @@ export default function Movie() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post(`/api/movie/create`, { title: values.title, duration: values.duration, releaseDate: values.releaseDate, directorId: director });
+      await axios.post(`/api/movie/create`, { title: values.title, note: values.note, synopsis: values.synopsis, duration: values.duration, dateRelease: values.dateRelease, directorId: director });
       // toast.success("Topic added !");
       form.reset();
 
@@ -148,10 +142,10 @@ export default function Movie() {
 
         <FormField
           control={form.control}
-          name="releaseDate"
+          name="dateRelease"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Date of birth</FormLabel>
+              <FormLabel>dateRelease</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
