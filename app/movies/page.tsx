@@ -40,7 +40,8 @@ const formSchema = z.object({
 })
 
 export default function Movie() {
-  const director = 2;
+
+  
 
   const router = useRouter();
 
@@ -60,7 +61,7 @@ export default function Movie() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post(`/api/movie/create`, { title: values.title, note: values.note, synopsis: values.synopsis, duration: values.duration, dateRelease: values.dateRelease, directorId: director });
+      await axios.post(`/api/movie/create`, values);
       // toast.success("Topic added !");
       form.reset();
 
@@ -146,7 +147,7 @@ export default function Movie() {
           name="dateRelease"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>dateRelease</FormLabel>
+              <FormLabel>Date of release</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -178,9 +179,6 @@ export default function Movie() {
                   />
                 </PopoverContent>
               </Popover>
-              <FormDescription>
-                Your date of birth is used to calculate your age.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
