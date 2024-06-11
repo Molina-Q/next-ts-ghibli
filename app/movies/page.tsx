@@ -28,15 +28,15 @@ import { cn } from "@/lib/utils"
 
 const formSchema = z.object({
   title: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: "Title must be at least 2 characters.",
   }),
-  duration: z.string().transform((v) => Number(v) || 0),
+  duration: z.coerce.number(),
   synopsis: z.string().min(10, {
     message: "Synopsis must be at least 10 characters.",
   }),
-  note: z.string().transform((v) => Number(v) || 0),
+  note: z.coerce.number(),
   dateRelease: z.date(),
-  directorId: z.string().transform((v) => Number(v) || 0),
+  directorId: z.coerce.number(),
 })
 
 export default function Movie() {
