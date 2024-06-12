@@ -25,6 +25,8 @@ import { Calendar as CalendarIcon } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useEffect, useState } from "react"
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -41,9 +43,9 @@ const formSchema = z.object({
 
 export default function Movie() {
 
-  
-
   const router = useRouter();
+
+  const [directors, setDirectors] = useState<({ person: { id: number; lastName: string; firstName: string; }; } & { id: number; personId: number; createdAt: Date; })[]>([]);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -72,6 +74,24 @@ export default function Movie() {
     }
     console.log(values)
   }
+
+
+  useEffect(() => {
+    const fetchDirectors = async () => {
+      try {
+        const response = await axios.get('/api/directors');
+        setDirectors(response.data);
+
+      } catch (error) {
+        console.log('error : ', error);
+      }
+    }
+
+    fetchDirectors();
+  }, [])
+
+  console.log(directors);
+  
 
   return (
     <Form {...form} >
@@ -184,20 +204,29 @@ export default function Movie() {
           )}
         />
 
-
         <FormField
           control={form.control}
           name="directorId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Director</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="7" {...field} />
-              </FormControl>
+              <FormLabel>Directors</FormLabel>
+              <Select onValueChange={field.onChange} >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="-- Directors --" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {directors.map((director) => (
+                    <SelectItem key={director.id} value={director.id.toString()}>{director.person.firstName} {director.person.lastName}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>
