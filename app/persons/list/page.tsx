@@ -25,7 +25,7 @@ const ListPersons = async () => {
       
 
         {persons.map((person) => (
-          <Card key={person.id}>
+          <Card key={person.id} className='shadow-md hover:-translate-y-2 hover:shadow-xl transition-all'>
             <CardHeader>
               <CardTitle>{person.firstName} {person.lastName}</CardTitle>
               <CardDescription>Born in {person.birthdate.getFullYear()}</CardDescription>
