@@ -1,5 +1,4 @@
 "use client"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -38,8 +37,8 @@ const formSchema = z.object({
 })
 
 export default function MovieForm() {
-
     const router = useRouter();
+
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -60,6 +59,7 @@ export default function MovieForm() {
             form.reset();
 
             router.refresh();
+
         } catch {
             // toast.error("Something went wrong");
             console.log("error")
