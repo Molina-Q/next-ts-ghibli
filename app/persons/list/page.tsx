@@ -4,14 +4,13 @@ import { PrismaClient } from '@prisma/client';
 import React from 'react'
 
 const ListPersons = async () => {
-  const prisma = new PrismaClient();
-  const persons = await prisma.person.findMany({
+
+  const persons = await db.person.findMany({
     include: {
       directors: {
         include: {
           movies: true
         }
-
       }
     }
   });
