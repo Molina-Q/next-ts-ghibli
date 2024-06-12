@@ -3,13 +3,13 @@ import { db } from '@/lib/db';
 import { PrismaClient } from '@prisma/client';
 import React from 'react'
 
-const ListPersons = async () => {
+const ListMovies = async () => {
 
   const movies = await db.movie.findMany();
 
   return (
     <div>
-      <h1 className='text-3xl mx-auto'>List of Movies</h1>
+      <h1 className='text-3xl'>List of Movies</h1>
 
       <div className='flex flex-wrap gap-4 p-12'>
         {movies.map((movie) => (
@@ -44,4 +44,4 @@ const ListPersons = async () => {
   )
 }
 
-export default ListPersons;
+export default ListMovies;

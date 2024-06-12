@@ -23,7 +23,6 @@ const ListPersons = async () => {
 
       <div className='grid grid-cols-6 gap-4 p-12'>
       
-
         {persons.map((person) => (
           <Card key={person.id} className='shadow-md hover:-translate-y-2 hover:shadow-xl transition-all'>
             <CardHeader>

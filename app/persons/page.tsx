@@ -36,7 +36,7 @@ const formSchema = z.object({
     birthdate: z.date(),
 })
 
-export default function MovieForm() {
+export default function PersoForm() {
     const router = useRouter();
 
 
@@ -70,6 +70,8 @@ export default function MovieForm() {
     return (
         <Form {...form} >
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 space-x-10">
+
+                <h1 className='text-3xl'>Person's Form</h1>
 
                 <div className="flex gap-4 ">
                     <FormField
@@ -152,9 +154,6 @@ export default function MovieForm() {
                                     />
                                 </PopoverContent>
                             </Popover>
-                            <FormDescription>
-                                Your date of birth is used to calculate your age.
-                            </FormDescription>
                             <FormMessage />
                         </FormItem>
                     )}

@@ -97,6 +97,8 @@ export default function Movie() {
     <Form {...form} >
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 space-x-10">
 
+        <h1 className='text-3xl'>Movie's Form</h1>
+
         <FormField
           control={form.control}
           name="title"
