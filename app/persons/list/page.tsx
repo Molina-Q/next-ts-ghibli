@@ -9,13 +9,15 @@ const ListPersons = async () => {
     include: {
       directors: {
         include: {
-          movies: true
+          movies: {
+            select: {
+              title: true
+            }
+          }
         }
       }
     }
   });
-
-  console.log(persons[0].directors);
 
   return (
     <div>
@@ -33,7 +35,6 @@ const ListPersons = async () => {
               <p>{person.directors[0] ? 'Director' : 'Jobless'}</p>
             </CardContent>
             <CardFooter>
-
               <p>
                 {
                   (person.directors[0] && person.directors[0].movies) &&
