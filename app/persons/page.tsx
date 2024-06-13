@@ -24,6 +24,7 @@ import { Calendar as CalendarIcon } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
+import { toast } from "sonner"
 
 const formSchema = z.object({
     lastName: z.string().min(1, {
@@ -55,16 +56,14 @@ export default function PersoForm() {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             await axios.post(`/api/person/create`, values);
-            // toast.success("Topic added !");
+            toast.success("Person created successfully !");
             form.reset();
 
             router.refresh();
 
         } catch {
-            // toast.error("Something went wrong");
-            console.log("error")
+            toast.error("Something went wrong");
         }
-        console.log(values)
     }
 
     return (

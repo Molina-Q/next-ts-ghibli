@@ -27,6 +27,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -42,7 +43,6 @@ const formSchema = z.object({
 })
 
 export default function Movie() {
-
   const router = useRouter();
 
   const [directors, setDirectors] = useState<({ person: { id: number; lastName: string; firstName: string; }; } & { id: number; personId: number; createdAt: Date; })[]>([]);
@@ -60,21 +60,17 @@ export default function Movie() {
     },
   })
 
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post(`/api/movie/create`, values);
-      // toast.success("Topic added !");
+      toast.success("Movie created successfully !");
       form.reset();
 
       router.refresh();
     } catch {
-      // toast.error("Something went wrong");
-      console.log("error")
+      toast.error("Something went wrong");
     }
-    console.log(values)
   }
-
 
   useEffect(() => {
     const fetchDirectors = async () => {
