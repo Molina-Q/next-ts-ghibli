@@ -25,6 +25,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
+import { Switch } from "@/components/ui/switch"
 
 const formSchema = z.object({
     lastName: z.string().min(1, {
@@ -35,6 +36,8 @@ const formSchema = z.object({
     }),
     sex: z.string(),
     birthdate: z.date(),
+    actor: z.boolean(),
+    director: z.boolean(),
 })
 
 export default function PersoForm() {
@@ -49,6 +52,8 @@ export default function PersoForm() {
             firstName: "",
             sex: "",
             birthdate: new Date(),
+            actor: false,
+            director: false,
         },
     })
 
@@ -67,8 +72,8 @@ export default function PersoForm() {
     }
 
     return (
-        <Form {...form} >
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 space-x-10">
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 space-x-10 px-5 py-14 border rounded-xl">
 
                 <h1 className='text-3xl'>Person's Form</h1>
 
@@ -154,6 +159,48 @@ export default function PersoForm() {
                                 </PopoverContent>
                             </Popover>
                             <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="actor"
+                    render={({ field }) => (
+                        <FormItem className="flex flex-row w-fit gap-10 items-center rounded-lg border p-4">
+                            <div className="space-y-0.5">
+                                <FormLabel className="text-base">Actor</FormLabel>
+                                <FormDescription>
+                                Is that person an actor ?
+                                </FormDescription>
+                            </div>
+                            <FormControl>
+                                <Switch
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="director"
+                    render={({ field }) => (
+                        <FormItem className="flex flex-row w-fit gap-10 items-center rounded-lg border p-4">
+                            <div className="space-y-0.5">
+                                <FormLabel className="text-base">Director</FormLabel>
+                                <FormDescription>
+                                    Is that person a director ?
+                                </FormDescription>
+                            </div>
+                            <FormControl>
+                                <Switch
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                />
+                            </FormControl>
                         </FormItem>
                     )}
                 />
