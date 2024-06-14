@@ -20,16 +20,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
 
-        <nav className="bg-slate-900">
-          <ul className="flex gap-x-8 p-8 text-white">
+        <nav className="bg-slate-900 text-white">
+          <ul className="flex gap-x-8 p-8">
             <li><Link href="/persons">Person Form</Link></li>
             <li><Link href="/movies">Movie Form</Link></li>
+            <li><Link href="/roles">Role Form</Link></li>
+            <li><Link href="/genres">Genre Form</Link></li>
             <li><Link href="/persons/list">Persons List</Link></li>
             <li><Link href="/movies/list">Movies List</Link></li>
           </ul>
         </nav>
 
-        <main className="p-6">
+        <main className="px-6 py-6">
           {children}
         </main>
         <Toaster />
