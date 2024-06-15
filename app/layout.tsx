@@ -28,6 +28,8 @@ export default function RootLayout({
             <li><Link href="/genres">Genre Form</Link></li>
             <li><Link href="/persons/list">Persons List</Link></li>
             <li><Link href="/movies/list">Movies List</Link></li>
+            <li><Link href="/roles/list">Roles List</Link></li>
+            <li><Link href="/genres/list">Genres List</Link></li>
           </ul>
         </nav>
 
