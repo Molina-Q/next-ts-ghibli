@@ -91,7 +91,7 @@ export default function Movie() {
 
   return (
     <Form {...form} >
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 space-x-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 space-x-10 px-5 py-14 border rounded-xl">
 
         <h1 className='text-3xl'>Movie's Form</h1>
 
