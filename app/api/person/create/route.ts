@@ -7,7 +7,7 @@ export async function POST(
     req: Request
 ) {
     try {
-        const { lastName, firstName, sex, birthdate } = await req.json();
+        const { lastName, firstName, sex, birthdate, director, actor } = await req.json();
 
         const person = await db.person.create({
             data: {
