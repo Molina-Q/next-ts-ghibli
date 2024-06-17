@@ -3,6 +3,15 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { Toaster } from "@/components/ui/sonner";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +30,20 @@ export default function RootLayout({
       <body className={inter.className}>
 
         <nav className="bg-slate-900 text-white">
-          <ul className="flex gap-x-8 p-8">
-            <li><Link href="/persons">Person Form</Link></li>
-            <li><Link href="/movies">Movie Form</Link></li>
-            <li><Link href="/roles">Role Form</Link></li>
-            <li><Link href="/genres">Genre Form</Link></li>
+          <ul className="flex items-center gap-x-8 p-8">
+            <li>
+              <Menubar>
+                <MenubarMenu>
+                  <MenubarTrigger className="text-black">Creation Forms</MenubarTrigger>
+                  <MenubarContent>
+                    <MenubarItem><Link href="/persons">Person Form</Link></MenubarItem>
+                    <MenubarItem><Link href="/movies">Movie Form</Link></MenubarItem>
+                    <MenubarItem><Link href="/roles">Role Form</Link></MenubarItem>
+                    <MenubarItem><Link href="/genres">Genre Form</Link></MenubarItem>
+                  </MenubarContent>
+                </MenubarMenu>
+              </Menubar>
+            </li>
             <li><Link href="/persons/list">Persons List</Link></li>
             <li><Link href="/movies/list">Movies List</Link></li>
             <li><Link href="/roles/list">Roles List</Link></li>
