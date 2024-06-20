@@ -40,6 +40,7 @@ export default function RootLayout({
                     <MenubarItem><Link href="/movies">Movie Form</Link></MenubarItem>
                     <MenubarItem><Link href="/roles">Role Form</Link></MenubarItem>
                     <MenubarItem><Link href="/genres">Genre Form</Link></MenubarItem>
+                    <MenubarItem><Link href="/castings">Casting Form</Link></MenubarItem>
                   </MenubarContent>
                 </MenubarMenu>
               </Menubar>
