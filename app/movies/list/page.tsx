@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { db } from '@/lib/db';
 import { PrismaClient } from '@prisma/client';
+import Link from 'next/link';
 import React from 'react'
 
 const ListMovies = async () => {
@@ -13,29 +14,31 @@ const ListMovies = async () => {
 
       <div className='flex flex-wrap gap-4 p-12'>
         {movies.map((movie) => (
-          <Card key={movie.id} className='size-72 shadow-md hover:-translate-y-2 hover:shadow-xl transition-all'>
-            <CardHeader>
-              <CardTitle className='hyphens-auto'>{movie.title}</CardTitle>
-              <CardDescription className='line-clamp-1'>{movie.synopsis}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {/* <p>{movie.duration}:00 hours long</p> */}
-              <p>Released in <b>{movie.dateRelease.getFullYear()}</b></p>
-            </CardContent>
-            <CardFooter>
+          <Link key={movie.id} href={`/movies/${movie.id}`}>
+            <Card className='size-72 shadow-md hover:-translate-y-2 hover:shadow-xl transition-all'>
+              <CardHeader>
+                <CardTitle className='hyphens-auto'>{movie.title}</CardTitle>
+                <CardDescription className='line-clamp-1'>{movie.synopsis}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {/* <p>{movie.duration}:00 hours long</p> */}
+                <p>Released in <b>{movie.dateRelease.getFullYear()}</b></p>
+              </CardContent>
+              <CardFooter>
 
-              {/* <p>
+                {/* <p>
                 {
                   (movie.directors[0] && movie.directors[0].movies) &&
                   movie.directors.map((director) => (
                     director.movies.map((movie) => (
                       movie.title
-                    ))
-                  ))
-                }
-              </p> */}
-            </CardFooter>
-          </Card>
+                      ))
+                      ))
+                      }
+                      </p> */}
+              </CardFooter>
+            </Card>
+          </Link>
 
         ))}
       </div>
