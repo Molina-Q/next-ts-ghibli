@@ -121,43 +121,20 @@ export default function PersoForm() {
                     )}
                 />
 
+
                 <FormField
                     control={form.control}
                     name="birthdate"
                     render={({ field }) => (
-                        <FormItem className="flex flex-col">
-                            <FormLabel>Date of birth</FormLabel>
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <FormControl>
-                                        <Button
-                                            variant={"outline"}
-                                            className={cn(
-                                                "w-[240px] pl-3 text-left font-normal",
-                                                !field.value && "text-muted-foreground"
-                                            )}
-                                        >
-                                            {field.value ? (
-                                                format(field.value, "PPP")
-                                            ) : (
-                                                <span>Pick a date</span>
-                                            )}
-                                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                        </Button>
-                                    </FormControl>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0" align="start">
-                                    <Calendar
-                                        mode="single"
-                                        selected={field.value}
-                                        onSelect={field.onChange}
-                                        disabled={(date) =>
-                                            date > new Date() || date < new Date("1900-01-01")
-                                        }
-                                        initialFocus
-                                    />
-                                </PopoverContent>
-                            </Popover>
+                        <FormItem>
+                            <FormLabel>Date of Birth</FormLabel>
+                            <FormControl>
+                                <Input
+                                    type="date"
+                                    value={field.value ? field.value.toISOString().split('T')[0] : ''}
+                                    onChange={event => field.onChange(new Date(event.target.value))}
+                                />
+                            </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
@@ -171,7 +148,7 @@ export default function PersoForm() {
                             <div className="space-y-0.5">
                                 <FormLabel className="text-base">Actor</FormLabel>
                                 <FormDescription>
-                                Is that person an actor ?
+                                    Is that person an actor ?
                                 </FormDescription>
                             </div>
                             <FormControl>
