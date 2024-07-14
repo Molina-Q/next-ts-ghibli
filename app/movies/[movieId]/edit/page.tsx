@@ -39,31 +39,16 @@ export default function MovieEdit({ params }: { params: { movieId: string } }) {
   const [directors, setDirectors] = useState<({ person: { id: number; lastName: string; firstName: string; }; } & { id: number; personId: number; createdAt: Date; })[]>([]);
   const [movie, setMovie] = useState<Movie>();
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const response = await axios.get(`/api/movie/${params.movieId}/edit`);
-        setMovie(response.data);
-
-      } catch (error) {
-        console.log('error : ', error);
-      }
-    }
-
-    fetchMovie();
-  }, []);
-
-
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      duration: 0,
-      synopsis: "",
-      note: 0,
-      dateRelease: new Date(),
-      directorId: 0,
+      title: movie?.title,
+      duration: movie?.duration,
+      synopsis: movie?.synopsis,
+      note: movie?.note,
+      dateRelease: movie?.dateRelease,
+      directorId: movie?.directorId,
     },
   })
 
@@ -90,10 +75,25 @@ export default function MovieEdit({ params }: { params: { movieId: string } }) {
       }
     }
 
+    const fetchMovie = async () => {
+      try {
+        const response = await axios.get(`/api/movie/${params.movieId}`);
+        setMovie(response.data);
+
+      } catch (error) {
+        console.log('error : ', error);
+      }
+    }
+
+    fetchMovie();
+
     fetchDirectors();
   }, [])
 
-  console.log(directors);
+  console.log("Movies : ", movie);
+  
+
+  console.log("Directors : ",directors);
 
 
   return (
@@ -119,6 +119,7 @@ export default function MovieEdit({ params }: { params: { movieId: string } }) {
         <FormField
           control={form.control}
           name="duration"
+          defaultValue={movie?.duration}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Duration</FormLabel>
@@ -157,7 +158,7 @@ export default function MovieEdit({ params }: { params: { movieId: string } }) {
             <FormItem>
               <FormLabel>Note</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="7" {...field} />
+                <Input type="number" placeholder="7" min={0} max={10} {...field} />
               </FormControl>
               <FormDescription>
                 This is the note of the movie between 0 and 10.
