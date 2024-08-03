@@ -1,10 +1,14 @@
 import { db } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(params: { movieId: string }) {
+type Params = {
+    movieId: string
+}
+
+export async function GET(request: Request, context: { params: Params }) {
     try {
         // Extracting the movieId from the URL query parameters
-        const movieId = params.movieId;
+        const movieId = context.params.movieId;
 
         if (!movieId) {
             return new NextResponse("Movie ID is required", { status: 400 });
