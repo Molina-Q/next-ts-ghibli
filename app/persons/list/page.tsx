@@ -33,7 +33,8 @@ const ListPersons = async () => {
               <CardDescription>Born in {person.birthdate.getFullYear()} | {calculateAge(person.birthdate)} years old </CardDescription>
             </CardHeader>
             <CardContent>
-              <p>{person.directors[0] ? 'Director' : 'Jobless'}</p>
+              <p>{person.directors[0] && 'Director'}</p>
+              {/* <p>{person. && 'Director'}</p> */}
             </CardContent>
             <CardFooter className='flex flex-col'>
               {
